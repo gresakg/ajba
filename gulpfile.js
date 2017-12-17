@@ -9,6 +9,7 @@ var concat 		= require('gulp-concat');
 var rename 		= require('gulp-rename');
 var jshint 		= require('gulp-jshint');
 var uglify		= require('gulp-uglify');
+var livereload	= require('gulp-livereload');
 
 var options 	= {};
 
@@ -24,10 +25,12 @@ gulp.task('import',function(){
 });
 
 gulp.task('less', function() {
-	return gulp.src('./src/less/index.less')
+	return gulp.src('src/less/index.less')
 	.pipe(plumber())
 	.pipe(less({
-		paths: [path.join(__dirname,'./node_modules/font-awesome/less/')]
+		paths: [
+		path.join(__dirname,'./node_modules/font-awesome/less/'),
+		path.join(__dirname,'./src/css/')]
 	}))
 	.pipe(gulp.dest('./css'))
 	.pipe(concat('styles.css'))
@@ -51,6 +54,8 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('watch',function() {
+	livereload.listen();
+	gulp.watch('**/*.php', livereload.reload);
 	gulp.watch('src/js/*.js',['scripts']);
 	gulp.watch('src/less/*.less',['less']);
 });
