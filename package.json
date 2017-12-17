@@ -4,12 +4,30 @@
   "description": "Wordpress starter theme.",
   "main": "index.js",
   "scripts": {
+  	"install": "gulp import",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Gregor Grešak",
   "license": "GPL-2.0",
   "repository": {
-  	"type": "git",
-  	"url": "https://github.com/gresakg/ajba.git"
+    "type": "git",
+    "url": "https://github.com/gresakg/ajba.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssimport": "^6.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-less": "^3.3.2",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "gulp-watch": "^4.3.11",
+    "jshint": "^2.9.5",
+    "less": "^2.7.3"
+  },
+  "dependencies": {
+    "purecss": "^1.0.0"
   }
 }
