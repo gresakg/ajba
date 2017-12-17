@@ -36,7 +36,7 @@ class Ajba{
 
 	public function enqueue_scripts() {
 		wp_enqueue_style( "base", get_stylesheet_directory_uri()."/css/index.css" , array(), $this->version );
-		wp_enqueue_script( "main", get_template_directory_uri()."/js/main.js", array("jquery"), $this->version, true );
+		wp_enqueue_script( "main", get_template_directory_uri()."/js/all.min.js", array("jquery"), $this->version, true );
 		add_action( 'init', array($this, 'register_menus') );
 	}
 
