@@ -14,6 +14,8 @@ class Ajba{
 	 */
 	protected $version;
 
+	public $crumbs = array();
+
 	protected static $instance;
 
 	private function __construct($path){
@@ -24,10 +26,13 @@ class Ajba{
 
 	public function set_filters() {
 		add_theme_support( 'post-thumbnails' );
+		add_theme_support( 'custom-logo' );
 		add_action("wp_enqueue_scripts",array($this,"enqueue_scripts"));
 		add_action('init', array($this,"post_type_support"));
 		add_action('init', array($this,"register_menus"));
 		add_action('init', array($this,"sidebars"));
+
+		add_action('customize_register', "GGCustomizer::instance",10,1);
 	}
 
 	public function post_type_support() {
@@ -35,8 +40,8 @@ class Ajba{
 	}
 
 	public function enqueue_scripts() {
-		wp_enqueue_style( "base", get_stylesheet_directory_uri()."/css/index.css" , array(), $this->version );
-		wp_enqueue_script( "main", get_template_directory_uri()."/js/all.min.js", array("jquery"), $this->version, true );
+		wp_enqueue_style( "base", get_stylesheet_directory_uri()."/css/index.css");//,array(),$this->version 
+		wp_enqueue_script( "main", get_template_directory_uri()."/js/all.min.js", array("jquery"), NULL, true );
 		add_action( 'init', array($this, 'register_menus') );
 	}
 

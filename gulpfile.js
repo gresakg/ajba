@@ -10,6 +10,7 @@ var rename 		= require('gulp-rename');
 var jshint 		= require('gulp-jshint');
 var uglify		= require('gulp-uglify');
 var livereload	= require('gulp-livereload');
+var bump 		= require('gulp-bump');
 
 var options 	= {};
 
@@ -39,6 +40,7 @@ gulp.task('less', function() {
 		suffix:'.min'
 	}))
 	.pipe(gulp.dest('./css'))
+	.pipe(livereload())
 	;
 });
 
@@ -53,11 +55,17 @@ gulp.task('scripts', function() {
 	;
 });
 
+gulp.task('bump', function(){
+  gulp.src('./style.css')
+  .pipe(bump())
+  .pipe(gulp.dest('./'));
+});
+
 gulp.task('watch',function() {
 	livereload.listen();
 	gulp.watch('**/*.php', livereload.reload);
-	gulp.watch('src/js/*.js',['scripts']);
-	gulp.watch('src/less/*.less',['less']);
+	gulp.watch('src/js/*.js',['scripts','bump'], livereload.reload);
+	gulp.watch('src/less/*.less',['less','bump'], livereload.reload);
 });
 
-gulp.task('default',['less','scripts','watch']);
+gulp.task('default',['less','scripts','bump','watch']);
